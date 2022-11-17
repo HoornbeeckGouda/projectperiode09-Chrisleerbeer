@@ -136,4 +136,136 @@
         height: 100px;
         font-size: 20px;
     }
+
+    .subscriptions
+    {
+        margin-top: 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .subscriptions-title
+        {
+            font-size: 40px;
+        }
+
+        .subscription-cards
+        {
+            display: flex;
+            gap: 100px;
+            
+            .subscription-card
+            {
+                width: 300px;
+                height: 390px;
+                border-radius: 25px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                border: #000 1px solid;   
+
+                .card-bar 
+                {
+                    justify-content: flex-start;
+                    width: 300px;
+                    height: 60px;
+                    border-radius: 25px 25px 0px 0px;
+                }
+
+                .card-title
+                {
+                    font-size: 30px;
+                }
+
+                .card-price
+                {
+                    margin: -15px;
+                    font-size: 80px;
+                }
+
+                .card-length
+                {
+                    margin-top: -20px;
+                    font-size: 20px;
+                }
+
+                .book-amount
+                {
+                    font-size: 30px;
+                    margin-top: 150px;
+                }
+            }
+
+            .basic-subscription
+            {
+
+                .card-bar
+                {
+                    background-color: #7de0a8;
+                }
+
+                .card-title
+                {
+                    color: #7de0a8;
+                }
+
+                .book-amount
+                {
+                    color: #7de0a8;
+                }
+            }
+
+            .standard-subscription
+            {
+
+                .card-bar
+                {
+                    background-color: #5aabe2;
+                }
+
+                .card-title
+                {
+                    color: #5aabe2;
+                }
+
+                .book-amount
+                {
+                    color: #5aabe2;
+                }
+            }
+
+            .premium-subscription
+            {
+                position: relative;
+                overflow: hidden;
+                .discount-bar
+                {
+                    position: absolute;
+                    background-color: #d80000;
+                    color: #fff;
+                    width: 150px;
+                    text-align: center;
+                    left: -30px;
+                    top: 35px;
+                    rotate: -45deg;
+                }
+
+                .card-bar
+                {
+                    background-color: #a857d0;
+                }
+
+                .card-title
+                {
+                    color: #a857d0;
+                }
+
+                .book-amount
+                {
+                    color: #a857d0;
+                }
+            }
+        }
+    }
 }

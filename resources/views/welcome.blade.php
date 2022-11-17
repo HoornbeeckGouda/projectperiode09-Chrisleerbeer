@@ -48,5 +48,63 @@
         <div class="quote">
             <p>“A reader lives a thousand lives before he dies . . .  The man who never reads lives only one.”<br>- George R.R. Martin</p>
         </div>
+        <div class="subscriptions">
+            <div class="subscriptions-title">
+                <h2>OUR <span class="colored-text">SUBSCRIPTIONS</span></h2>
+            </div>
+            <div class="subscription-cards">
+                <div class="subscription-card basic-subscription">
+                    <div class="card-bar"></div>
+                    <div class="card-title">
+                        <h3>BASIC</h3>
+                    </div>
+                    <div class="card-price">
+                        <h3>€5</h3>
+                    </div>
+                    <div class="card-length">
+                        <h3>PER MONTH</h3>
+                    </div>
+                    <div class="book-amount">
+                        <h3>5 BOOKS</h3>
+                    </div>
+                </div>
+                <div class="subscription-card standard-subscription">
+                    <div class="card-bar"></div>
+                    <div class="card-title">
+                        <h3>STANDARD</h3>
+                    </div>
+                    <div class="card-price">
+                        <h3>€10</h3>
+                    </div>
+                    <div class="card-length">
+                        <h3>PER MONTH</h3>
+                    </div>
+                    <div class="book-amount">
+                        <h3>10 BOOKS</h3>
+                    </div>
+                </div>
+                <div class="subscription-card premium-subscription">
+                    <div class="card-bar"></div>
+                    <div class="discount-bar">
+                        <p>50%</p>
+                    </div>
+                    <div class="card-title">
+                        <h3>PREMIUM</h3>
+                    </div>
+                    <div class="card-price">
+                        <h3>€12</h3>
+                    </div>
+                    <div class="original-price">
+                        <h3>€24</h3>
+                    </div>
+                    <div class="card-length">
+                        <h3>PER MONTH</h3>
+                    </div>
+                    <div class="book-amount">
+                        <h3>15 BOOKS</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
