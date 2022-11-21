@@ -15,6 +15,11 @@
     color: #BFC5FF;
 }
 
+.grey-text
+{
+    color: #acacac;
+}
+
 .logo
 {
     width: 120px;
@@ -292,7 +297,7 @@
         flex-direction: row;
         align-items: flex-end;
         justify-content: space-between;
-        margin-bottom: -35px;
+        padding-bottom: -35px;
         background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://127.0.0.1:8000/storage/images/lees.jpg');
         background-position-y: center;
         background-size: cover;
@@ -311,6 +316,113 @@
             color: #fff;
             font-size: 20px;
             padding-bottom: 10px;
+        }
+    }
+
+    .books-collection
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        background-color: #eceeff;
+
+        .collection-title
+        {
+            font-size: 30px;
+            margin-top: 50px;
+        }
+
+        .books
+        {
+            margin-top: 40px;
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 70px;
+
+            .book
+            {
+                width: 20%;
+                display: flex;
+                justify-content: center;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                font-size: 20px;
+                border: #acacac 0.5px solid;
+
+                .book-link
+                {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+
+                .book-image
+                {
+                    height: 200px;
+                    width: 200px;
+                }
+
+                .grey-text
+                {
+                    line-height: 10px;
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+
+    .book-wrapper
+    {
+        margin: 50px 75px 0px 75px;
+        display: flex;
+        .book-image-wrapper
+        {
+            height: 600px;
+            border: #bfc5ff 4px solid;
+            border-radius: 10px;
+            width: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .book-image
+            {
+                height: 300px;
+            }
+        }
+
+        .book-detail
+        {
+            max-width: 60%;  
+            padding-left: 100px; 
+            
+            h1
+            {
+                font-size: 50px;
+                height: 50px;
+            }
+
+            h3
+            {
+                font-size: 20px;
+            }
+
+            p
+            {
+                padding-top: 20px;
+            }
+        }
+
+        .reserve-button
+        {
+            background-color: #FF9B42;
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 20px;
         }
     }
 }

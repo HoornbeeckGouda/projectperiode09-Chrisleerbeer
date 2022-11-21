@@ -2,24 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
+use App\Models\reservation;
 use Illuminate\Http\Request;
 
-class BookController extends Controller
+class ReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home() {
-        return view("welcome");
-    }
-
     public function index()
     {
-        $books = Book::all();
-        return view("books", compact("books"));
+        //
     }
 
     /**
@@ -46,35 +41,21 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\book  $book
+     * @param  \App\Models\reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function show(book $book)
+    public function show(reservation $reservation)
     {
-        $reserved = Book::find(1)->reservations;
-        return view("book", compact("book", "reserved"));
-    }
-
-    public function reserve(book $book)
-    {
-        $reserved = Book::find(1)->reservations;
-        if (!$reserved->isEmpty())
-        {
-           echo "Error book has already been reserved";     
-        }
-        else
-        {
-            
-        }
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\book  $book
+     * @param  \App\Models\reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function edit(book $book)
+    public function edit(reservation $reservation)
     {
         //
     }
@@ -83,10 +64,10 @@ class BookController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\book  $book
+     * @param  \App\Models\reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, book $book)
+    public function update(Request $request, reservation $reservation)
     {
         //
     }
@@ -94,10 +75,10 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\book  $book
+     * @param  \App\Models\reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(book $book)
+    public function destroy(reservation $reservation)
     {
         //
     }
