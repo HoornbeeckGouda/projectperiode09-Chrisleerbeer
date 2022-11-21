@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('book_id');
-            $table->timestamps();
+            $table->date('creation_date');
+            $table->date('expiration_date');
         });
     }
 

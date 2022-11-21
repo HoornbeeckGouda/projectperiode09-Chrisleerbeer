@@ -57,15 +57,16 @@ class BookController extends Controller
 
     public function reserve(book $book)
     {
-        $reserved = Book::find(1)->reservations;
-        if (!$reserved->isEmpty())
-        {
-           echo "Error book has already been reserved";     
-        }
-        else
-        {
-            
-        }
+        // $reserved = Book::find(1)->reservations;
+        // if (!$reserved->isEmpty())
+        // {
+        //    echo "Error book has already been reserved";     
+        // }
+        reservations::create([
+            'user_id'
+            'book_id'
+            ''
+        ]);
     }
 
     /**
