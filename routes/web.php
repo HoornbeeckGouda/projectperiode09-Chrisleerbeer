@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [BookController::class, 'home'])->name('home');
 Route::get('/books', [BookController::class, 'index'])->name('books');
 Route::get('/book/{book}', [BookController::class, 'show'])->name('book');
-Route::post('/book/{book}', [BookController::class, 'reserve'])->name('book.reserve');
+Route::post('/book/{book}/reserve', [BookController::class, 'reserve'])->name('book.reserve');
+Route::post('/book/{book}/loan', [BookController::class, 'loan'])->name('book.loan');
 
 require __DIR__.'/auth.php';

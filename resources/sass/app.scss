@@ -10,6 +10,49 @@
     font-weight: 600;
 }
 
+.main-button
+{
+    background-color: #FF9B42;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 20px;
+}
+
+.alert-wrapper
+{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .alert
+    {
+        background-color: #fff;
+        padding: 30px 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        
+        .close
+        {
+            background-color: #FF9B42;
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 20px;
+        }
+    }
+}
+
 .colored-text
 {
     color: #BFC5FF;
@@ -65,13 +108,15 @@
         
         .menu-search
         {
-            box-shadow: gray 2px 2px;
+            box-shadow: #808080 2px 2px;
             padding: 0px 10px 0px 10px;
-        .search-bar
-        {
-            border: none;
-            width: 170px;      
-        }
+            border: 2px solid #808080;
+
+            .search-bar
+            {
+                border: none;
+                width: 170px;      
+            }
         } 
 
         .menu-notifications
@@ -416,13 +461,9 @@
             }
         }
 
-        .reserve-button
+        .main-button
         {
-            background-color: #FF9B42;
-            color: #fff;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 20px;
+            margin-top: 10px;
         }
     }
 }

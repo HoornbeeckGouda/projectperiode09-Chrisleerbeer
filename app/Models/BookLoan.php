@@ -6,17 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Book;
 
-class reservation extends Model
+class bookLoan extends Model
 {
-    use HasFactory;
-
     public $timestamps = false;
     protected $fillable = [
-      'user_id',
-      'book_id', 
-      'creation_date', 
-      'expiration_date'
-   ];
+    'id',
+    'user_id', 
+    'book_id', 
+    'lend_date', 
+    'end_date',
+    'returned'
+    ];
+
+    use HasFactory;
 
     public function book()
     {

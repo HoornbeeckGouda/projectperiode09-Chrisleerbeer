@@ -1,10 +1,5 @@
 <x-guest-layout>
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
@@ -25,6 +20,33 @@
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
 
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
+
+            <!-- Address -->
+            <div class="mt-4">
+                <x-input-label for="adress" :value="__('Adress')" />
+
+                <x-text-input id="adress" class="block mt-1 w-full" type="text" name="adress" :value="old('adress')" required />
+
+                <x-input-error :messages="$errors->get('adress')" class="mt-2" />
+            </div>
+
+            <!-- Residence -->
+            <div class="mt-4">
+                <x-input-label for="residence" :value="__('Residence')" />
+
+                <x-text-input id="residence" class="block mt-1 w-full" type="text" name="residence" :value="old('residence')" required />
+
+                <x-input-error :messages="$errors->get('residence')" class="mt-2" />
+            </div>
+
+            <!-- Phonenumber -->
+            <div class="mt-4">
+                <x-input-label for="phonenumber" :value="__('Phonenumber')" />
+
+                <x-text-input id="phonenumber" class="block mt-1 w-full" type="phonenumber" name="phonenumber" :value="old('phonenumber')" required />
+
+                <x-input-error :messages="$errors->get('phonenumber')" class="mt-2" />
             </div>
 
             <!-- Password -->

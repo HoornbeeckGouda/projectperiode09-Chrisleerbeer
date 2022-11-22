@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Reservation;
+use App\Models\BookLoan;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class BookController extends Controller
 {
@@ -49,24 +52,74 @@ class BookController extends Controller
      * @param  \App\Models\book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(book $book)
+    public function show(Book $book)
     {
-        $reserved = Book::find(1)->reservations;
-        return view("book", compact("book", "reserved"));
+        $reserved = $book->reservations;
+        $lend = $book->bookLoans;
+        $user = auth()->user();
+        return view("book", compact("book", "reserved", "lend", "user"));
     }
 
     public function reserve(book $book)
     {
-        // $reserved = Book::find(1)->reservations;
-        // if (!$reserved->isEmpty())
-        // {
-        //    echo "Error book has already been reserved";     
-        // }
-        reservations::create([
-            'user_id'
-            'book_id'
-            ''
-        ]);
+        $user = auth()->user();
+        $reserved = Book::find(1)->reservations;
+        $lend = Book::find(1)->bookLoans;
+        if ($user->rol === "lezer")
+            if (!$lend->isEmpty())
+            {
+                return redirect()->route('book', $book->id)->with('error', 'Error book has already been loaned.');    
+            }
+            else{
+                if (!$reserved->isEmpty())
+                {
+                    return redirect()->route('book', $book->id)->with('error', 'Error book has already been reserved.');    
+                }
+                else{
+                Reservation::create([
+                    'user_id'=> $user->id,
+                    'book_id'=> $book->id,
+                    'creation_date'=> now(),
+                    'expiration_date'=> now()->addDays(14)
+                ]);
+                return redirect()->route('book', $book->id)->with('success', 'Reservation created successfully.');
+                }
+            }
+        else{
+            return redirect()->route('book', $book->id)->with('error', 'Error you do not have permission to do this.');
+        }
+    }
+
+    public function loan(book $book)
+    {
+        $user = auth()->user();
+        $reserved = Book::find(1)->reservations;
+        $lend = Book::find(1)->bookLoans;
+        if ($user->rol === "werknemer")
+            if (!$lend->isEmpty())
+            {
+                return redirect()->route('book', $book->id)->with('error', 'Error book has already been loaned.');   
+            }
+            else{
+                if (!$reserved->isEmpty())
+                {
+                    return redirect()->route('book', $book->id)->with('error', 'Error book has already been reserved.');   
+                }
+                else{
+                BookLoan::create([
+                    'user_id'=> "1",
+                    'book_id'=> "1",
+                    'lend_date'=> now(),
+                    'end_date'=> now()->addDays(14),
+                    'returned'=> "0"
+                ]);
+                return redirect()->route('book', $book->id)->with('succes', 'Loan created succesfully.');
+                }
+            }
+        else
+        {
+            return redirect()->route('book', $book->id)->with('error', 'Error you do not have permission to do this.');
+        }
     }
 
     /**
