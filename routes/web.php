@@ -21,6 +21,8 @@ Route::post('/book/{book}/reserve', [BookController::class, 'reserve'])->name('b
 Route::post('/book/{book}/loan', [BookController::class, 'loan'])->name('book.loan');
 Route::post('/book/{book}/deletereservation', [BookController::class, 'deleteReservation'])->name('book.deletereservation');
 Route::post('/book/{book}/return', [BookController::class, 'return'])->name('book.return');
+Route::post('/book/{book}/alert', [BookController::class, 'showAlert'])->name('book.alert');
+Route::get('/book/{book}/alert', [BookController::class, 'loan'])->name('book.alert.loan');
 Route::get('/login', fn () => view('auth.login'));
 
 require __DIR__.'/auth.php';

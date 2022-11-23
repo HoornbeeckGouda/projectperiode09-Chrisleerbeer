@@ -47,12 +47,28 @@
                 @endif
                 @if ($user->rol === 'werknemer')
                     @if (!$lend->isEmpty())
-                        <p>Sorry this book has already been loaned.</p>
-                        <form action="{{ route('book.return', $book->id) }}" method="POST">
-                            <button class="main-button">
-                                Click here to return the book.
-                            </button>
-                        </form>
+                        @if ($lend->last()->returned === 0)
+                            <p>Sorry this book has already been loaned.</p>
+                            <form action="{{ route('book.return', $book->id) }}" method="POST">
+                                @csrf
+                                <button class="main-button">
+                                    Click here to return the book.
+                                </button>
+                            </form>
+                        @else
+                            @if (!$reserved->isEmpty())    
+                                <button class="main-button">
+                                    Sorry this book has already been reserved by: {{ $user->name }} ({{ $user->id }}).
+                                </button>
+                            @else
+                                <form action="{{ route('book.alert', $book->id) }}" method="POST">
+                                    @csrf
+                                    <button class="main-button">
+                                        Loan
+                                    </button>
+                                </form>
+                            @endif 
+                        @endif 
                     @else
                         @if (!$reserved->isEmpty())    
                             <button class="main-button">

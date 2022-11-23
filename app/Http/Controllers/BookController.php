@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Reservation;
 use App\Models\BookLoan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -60,11 +61,20 @@ class BookController extends Controller
         return view("book", compact("book", "reserved", "lend", "user"));
     }
 
-    public function reserve(book $book)
+    public function showAlert(Book $book)
+    {
+        // $reserved = $book->reservations;
+        // $lend = $book->bookLoans;
+        // $user = auth()->user();
+        // return view("book", compact("book", "reserved", "lend", "user"))->with('leninginvoer', 'Voer ');
+        return redirect()->route('book', $book->id)->with('leninginvoer', 'Voer ');
+    }
+
+    public function reserve(Book $book)
     {
         $user = auth()->user();
-        $reserved = Book::find($book->id)->reservations;
-        $lend = Book::find($book->id)->bookLoans;
+        $reserved = $book->reservations;
+        $lend = $book->bookLoans;
         if ($user->rol === "lezer")
             if (!$lend->isEmpty())
             {
@@ -90,21 +100,51 @@ class BookController extends Controller
         }
     }
 
-    public function deleteReservation(book $book)
+    public function deleteReservation(Book $book)
     {
         Reservation::where('book_id', $book->id)->delete();
         return redirect()->route('book', $book->id)->with('success', 'Reservation cancelled successfully.');
     }
 
-    public function loan(book $book)
+    public function loan(Request $request, Book $book, User $user)
     {
+
         $user = auth()->user();
-        $reserved = Book::find(1)->reservations;
-        $lend = Book::find(1)->bookLoans;
+        $reserved = $book->reservations;
+        $lend = $book->bookLoans;
+        $user_id = $user->user_id;
         if ($user->rol === "werknemer")
             if (!$lend->isEmpty())
             {
-                return redirect()->route('book', $book->id)->with('error', 'Error book has already been loaned.');   
+                if ($lend[0]->returned === 1)
+                {
+                    if (!$reserved->isEmpty())
+                    {
+                        return redirect()->route('book', $book->id)->with('error', 'Error book has already been reserved.');   
+                    }
+                    else
+                    {
+                        if (!$user_id->isEmpty())
+                        {
+                            BookLoan::create([
+                                'user_id'=> $request->id,
+                                'book_id'=> $book->id,
+                                'lend_date'=> now(),
+                                'end_date'=> now()->addDays(14),
+                                'returned'=> "0"
+                            ]);
+                            return redirect()->route('book', $book->id)->with('success', 'Loan created succesfully.');
+                        }
+                        else
+                        {
+                            return redirect()->route('book', $book->id)->with("error", "User doesn't exist.");
+                        }
+                    }
+                }
+                else
+                {
+                    return redirect()->route('book', $book->id)->with('error', 'Error book has already been loaned.');
+                }   
             }
             else{
                 if (!$reserved->isEmpty())
@@ -119,7 +159,7 @@ class BookController extends Controller
                     'end_date'=> now()->addDays(14),
                     'returned'=> "0"
                 ]);
-                return redirect()->route('book', $book->id)->with('succes', 'Loan created succesfully.');
+                return redirect()->route('book', $book->id)->with('success', 'Loan created succesfully.');
                 }
             }
         else

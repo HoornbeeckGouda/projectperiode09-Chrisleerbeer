@@ -17,10 +17,22 @@
 @if (Session::has('error'))
     <div class="alert-wrapper">
         <div class="alert" role="alert">
-            <button type="button" class="close" data-dismiss="alert">
-                <i class="fa fa-times"></i>
-            </button>
             {{ session('error') }}
+            <button class="close" type="button" onClick="refreshPage()">Close</button>
+        </div>
+    </div>
+@endif
+
+@if (Session::has('leninginvoer'))
+    <div class="alert-wrapper">
+        <div class="alert" role="alert">
+            {{ session('leninginvoer') }}
+            <form action="{{ route('book.alert.loan', $book->id) }}" method="GET">
+                @csrf
+                <input id="id" name="id" type="text" placeholder="Enter user id">
+                <button class="main-button">submit</button>
+            </form>
+            <button class="close" type="button" onClick="refreshPage()">Close</button>
         </div>
     </div>
 @endif
