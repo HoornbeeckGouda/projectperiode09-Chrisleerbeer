@@ -4,11 +4,16 @@
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
+        <a href="{{ route('home') }}">
+            <i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i>
+        </a>
+        <h1 class="form-title">WELCOME BACK!</h1>
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email Address -->
-            <div>
+            <div class="input-field">
                 <x-input-label for="email" :value="__('Email')" />
 
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
@@ -17,7 +22,7 @@
             </div>
 
             <!-- Password -->
-            <div class="mt-4">
+            <div class="mt-4 input-field">
                 <x-input-label for="password" :value="__('Password')" />
 
                 <x-text-input id="password" class="block mt-1 w-full"
@@ -40,6 +45,12 @@
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
+                    </a>
+                @endif
+
+                @if (Route::has('register'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+                        {{ __("Don't have an account? Sign up!") }}
                     </a>
                 @endif
 

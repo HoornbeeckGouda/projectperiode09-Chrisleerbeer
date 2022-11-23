@@ -1,6 +1,10 @@
 <x-guest-layout>
     <x-auth-card>
 
+        <a href="{{ route('home') }}">
+            <i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i>
+        </a>
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
@@ -44,7 +48,7 @@
             <div class="mt-4">
                 <x-input-label for="phonenumber" :value="__('Phonenumber')" />
 
-                <x-text-input id="phonenumber" class="block mt-1 w-full" type="phonenumber" name="phonenumber" :value="old('phonenumber')" required />
+                <x-text-input id="phonenumber" class="block mt-1 w-full" type="text" name="phonenumber" :value="old('phonenumber')" required />
 
                 <x-input-error :messages="$errors->get('phonenumber')" class="mt-2" />
             </div>

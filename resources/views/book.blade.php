@@ -9,17 +9,26 @@
             <h1>{{ $book->title }}</h1>
             <h3>By {{ $book->writer }}</h3>
             <p>{{ $book->description }}</p>
-            <p>{{ $user->rol }}</p>
+            @auth
                 @if ($user->rol === 'lezer')
                     @if (!$lend->isEmpty())    
                     <button class="main-button">
                         Sorry this book has already been loaned.
                     </button>
                     @else
-                        @if (!$reserved->isEmpty())    
-                            <button class="main-button">
-                                Sorry this book has already been reserved.
-                            </button>
+                        @if (!$reserved->isEmpty())
+                            @if ($reserved->first()->user_id === $user->id)
+                                <form action="{{ route('book.deletereservation', $reservation->id) }}" method="POST">
+                                    @csrf
+                                    <button class="main-button">
+                                        Cancel reservation
+                                    </button>
+                                </form>
+                            @else    
+                                <button class="main-button">
+                                    Sorry this book has already been reserved.
+                                </button>
+                            @endif
                         @else
                             <form action="{{ route('book.reserve', $book->id) }}" method="POST">
                                 @csrf
@@ -50,6 +59,7 @@
                         @endif
                     @endif
                 @endif
+            @endauth
         </div>
     </div>
 @endsection

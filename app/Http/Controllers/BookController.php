@@ -63,8 +63,8 @@ class BookController extends Controller
     public function reserve(book $book)
     {
         $user = auth()->user();
-        $reserved = Book::find(1)->reservations;
-        $lend = Book::find(1)->bookLoans;
+        $reserved = Book::find($book->id)->reservations;
+        $lend = Book::find($book->id)->bookLoans;
         if ($user->rol === "lezer")
             if (!$lend->isEmpty())
             {
@@ -88,6 +88,11 @@ class BookController extends Controller
         else{
             return redirect()->route('book', $book->id)->with('error', 'Error you do not have permission to do this.');
         }
+    }
+
+    public function deleteReservation(book $book)
+    {
+        $reservation->delete();
     }
 
     public function loan(book $book)

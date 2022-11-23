@@ -9,9 +9,10 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+        <script src="https://kit.fontawesome.com/17a01b966a.js" crossorigin="anonymous"></script>
 
         <!-- Scripts -->
-        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">

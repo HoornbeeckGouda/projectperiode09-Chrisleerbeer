@@ -28,7 +28,9 @@
                     <i class="fa-regular fa-xl fa-bell"></i>
                 </div>
                 <div class="menu-profile">
-                    <i class="fa-solid fa-xl fa-user"></i>
+                    <a href="{{ route('login') }}">
+                        <i class="fa-solid fa-xl fa-user"></i>
+                    </a>
                 </div>
             </div>
         </div>
