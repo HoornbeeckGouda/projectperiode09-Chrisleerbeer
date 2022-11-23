@@ -92,7 +92,8 @@ class BookController extends Controller
 
     public function deleteReservation(book $book)
     {
-        $reservation->delete();
+        Reservation::where('book_id', $book->id)->delete();
+        return redirect()->route('book', $book->id)->with('success', 'Reservation cancelled successfully.');
     }
 
     public function loan(book $book)
@@ -125,6 +126,14 @@ class BookController extends Controller
         {
             return redirect()->route('book', $book->id)->with('error', 'Error you do not have permission to do this.');
         }
+    }
+
+    public function return(book $book)
+    {
+        BookLoan::where('book_id', $book->id)->update([
+            'returned'=> "1"
+        ]);
+        return redirect()->route('book', $book->id)->with('success', 'Book returned successfully.');
     }
 
     /**

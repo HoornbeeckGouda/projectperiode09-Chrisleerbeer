@@ -28,9 +28,19 @@
                     <i class="fa-regular fa-xl fa-bell"></i>
                 </div>
                 <div class="menu-profile">
-                    <a href="{{ route('login') }}">
-                        <i class="fa-solid fa-xl fa-user"></i>
-                    </a>
+                    @auth
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button>
+                                <i class="fa-solid fa-xl fa-user"></i>
+                            </button>
+                        </form>
+                    @endauth
+                    @guest
+                        <a href="{{ route('login') }}">
+                            <i class="fa-solid fa-xl fa-user"></i>
+                        </a>
+                    @endguest 
                 </div>
             </div>
         </div>
