@@ -36,3 +36,13 @@
         </div>
     </div>
 @endif
+
+@if (Session::has('no_account'))
+    <div class="alert-wrapper">
+        <div class="alert" role="alert">
+            {{ session('no_account') }}
+            <a class="close" href="{{ route('register')}}">Register</a>
+            <button class="close" type="button" onClick="refreshPage()">Close</button>
+        </div>
+    </div>
+@endif

@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Reservation;
 use App\Models\BookLoan;
+use App\Models\Subscription;
 
 class User extends Authenticatable
 {
@@ -22,6 +23,11 @@ class User extends Authenticatable
     public function userLoan()
     {
         return $this->hasMany(BookLoan::class);
+    }
+
+    public function userSubscription()
+    {
+        return $this->hasOne(Subscription::class);
     }
     /**
      * The attributes that are mass assignable.

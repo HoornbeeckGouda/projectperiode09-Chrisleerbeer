@@ -75,7 +75,7 @@
                                 Sorry this book has already been reserved by: {{ $user->name }} ({{ $user->id }}).
                             </button>
                         @else
-                            <form action="{{ route('book.loan', $book->id) }}" method="POST">
+                            <form action="{{ route('book.alert.loan', $book->id) }}" method="POST">
                                 @csrf
                                 <button class="main-button">
                                     Loan

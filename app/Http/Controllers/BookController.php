@@ -17,7 +17,9 @@ class BookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function home() {
-        return view("welcome");
+        $user = auth()->user();
+        $loan_history = BookLoan::whereUserId($user->id)->get();
+        return view("welcome", compact("loan_history"));
     }
 
     public function index()
@@ -106,17 +108,26 @@ class BookController extends Controller
         return redirect()->route('book', $book->id)->with('success', 'Reservation cancelled successfully.');
     }
 
-    public function loan(Request $request, Book $book, User $user)
+    public function loan(Request $request, Book $book)
     {
 
         $user = auth()->user();
         $reserved = $book->reservations;
         $lend = $book->bookLoans;
-        $user_id = $user->user_id;
+        $user_id = $request->id;
+
+        echo $user_id;
+        echo $book->id;
+        $test = BookLoan::whereUserId($user_id)->whereBookId($book->id)->get();
+
+        $user_lend = BookLoan::whereUserId($user_id)->get();
+
+        $subscription = User::find($user_id)->userSubscription->subscriptionPlan;
+
         if ($user->rol === "werknemer")
             if (!$lend->isEmpty())
             {
-                if ($lend[0]->returned === 1)
+                if ($lend->returned === 1)
                 {
                     if (!$reserved->isEmpty())
                     {
@@ -124,16 +135,23 @@ class BookController extends Controller
                     }
                     else
                     {
-                        if (!$user_id->isEmpty())
+                        if ($user_id)
                         {
-                            BookLoan::create([
-                                'user_id'=> $request->id,
-                                'book_id'=> $book->id,
-                                'lend_date'=> now(),
-                                'end_date'=> now()->addDays(14),
-                                'returned'=> "0"
-                            ]);
-                            return redirect()->route('book', $book->id)->with('success', 'Loan created succesfully.');
+                            if (count($user_lend) >= $subscription->amount) 
+                            {
+                                return redirect()->route('book', $book->id)->with('error', 'Maximum books for '.$request->name.'has been reached.');
+                            }
+                            else
+                            {
+                                BookLoan::create([
+                                    'user_id'=> $request->id,
+                                    'book_id'=> $book->id,
+                                    'lend_date'=> now(),
+                                    'end_date'=> now()->addDays(14),
+                                    'returned'=> "0"
+                                ]);
+                                return redirect()->route('book', $book->id)->with('success', 'Loan created succesfully.');
+                            }
                         }
                         else
                         {
@@ -146,20 +164,36 @@ class BookController extends Controller
                     return redirect()->route('book', $book->id)->with('error', 'Error book has already been loaned.');
                 }   
             }
-            else{
+            else
+            {
                 if (!$reserved->isEmpty())
                 {
                     return redirect()->route('book', $book->id)->with('error', 'Error book has already been reserved.');   
                 }
-                else{
-                BookLoan::create([
-                    'user_id'=> "1",
-                    'book_id'=> "1",
-                    'lend_date'=> now(),
-                    'end_date'=> now()->addDays(14),
-                    'returned'=> "0"
-                ]);
-                return redirect()->route('book', $book->id)->with('success', 'Loan created succesfully.');
+                else
+                {
+                    if ($user_id)
+                    {
+                        if (count($user_lend) >= $subscription->amount) 
+                        {
+                            return redirect()->route('book', $book->id)->with('error', 'Maximum books for '.$request->name.'has been reached.');
+                        }
+                        else
+                        {
+                            BookLoan::create([
+                                'user_id'=> $request->id,
+                                'book_id'=> $book->id,
+                                'lend_date'=> now(),
+                                'end_date'=> now()->addDays(14),
+                                'returned'=> "0"
+                            ]);
+                            return redirect()->route('book', $book->id)->with('success', 'Loan created succesfully.');
+                        }
+                    }
+                    else
+                    {
+                        return redirect()->route('book', $book->id)->with("error", "User doesn't exist.");
+                    }
                 }
             }
         else

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,7 @@ Route::post('/book/{book}/deletereservation', [BookController::class, 'deleteRes
 Route::post('/book/{book}/return', [BookController::class, 'return'])->name('book.return');
 Route::post('/book/{book}/alert', [BookController::class, 'showAlert'])->name('book.alert');
 Route::get('/book/{book}/alert', [BookController::class, 'loan'])->name('book.alert.loan');
+Route::get('/subscription/{id}', [SubscriptionController::class, 'create'])->name('subscription');
 Route::get('/login', fn () => view('auth.login'));
 
 require __DIR__.'/auth.php';
