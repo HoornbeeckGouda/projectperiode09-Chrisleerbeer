@@ -84,7 +84,4 @@
             </a>
         </div>
     </div>
-    @foreach ($loan_history as $loan_history)
-        <p>{{ $loan_history->book_id }}</p>
-    @endforeach
 @endsection

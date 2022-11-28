@@ -18,8 +18,8 @@ class BookController extends Controller
      */
     public function home() {
         $user = auth()->user();
-        $loan_history = BookLoan::whereUserId($user->id)->get();
-        return view("welcome", compact("loan_history"));
+        // $loan_history = BookLoan::whereUserId($user->id)->get();
+        return view("welcome");
     }
 
     public function index()
@@ -115,9 +115,7 @@ class BookController extends Controller
         $reserved = $book->reservations;
         $lend = $book->bookLoans;
         $user_id = $request->id;
-
-        echo $user_id;
-        echo $book->id;
+        
         $test = BookLoan::whereUserId($user_id)->whereBookId($book->id)->get();
 
         $user_lend = BookLoan::whereUserId($user_id)->get();

@@ -16,7 +16,6 @@
                 </div>
                 <div class="menu-links">
                     <a href="{{ route('books') }}">BOOKS</a>
-                    <a href="./categories">SUBSCRIPTIONS</a>
                 </div>
             </div>
             <div class="menu-right">
