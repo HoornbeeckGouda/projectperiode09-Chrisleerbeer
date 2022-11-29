@@ -125,7 +125,7 @@ class BookController extends Controller
         if ($user->rol === "werknemer")
             if (!$lend->isEmpty())
             {
-                if ($lend->returned === 1)
+                if ($lend[0]->returned === 1)
                 {
                     if (!$reserved->isEmpty())
                     {
